@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -67,18 +68,18 @@ class _JyankenPageState extends State<JyankenPage> {
   }
 
   void judge() {
+    /// gameCount += 1は全てのパターンで発生するので、
+    gameCount += 1; // if文で分岐する前に書いてしまった方が良い
     if (myHand == computerHand) {
       result = '引き分け';
-      drawCount += 1;
-      gameCount += 1;
-    } else if ((myHand == '✊' && computerHand == '✌️') || (myHand == '✌️' && computerHand == '✋') || (myHand == '✋' && computerHand == '✊')) {
+    } else if ((myHand == '✊' && computerHand == '✌️') ||
+        (myHand == '✌️' && computerHand == '✋') ||
+        (myHand == '✋' && computerHand == '✊')) {
       result = '勝ち';
       winCount += 1;
-      gameCount += 1;
     } else {
       result = '負け';
       loseCount += 1;
-      gameCount += 1;
     }
   }
 
@@ -90,6 +91,9 @@ class _JyankenPageState extends State<JyankenPage> {
   }
 
   void resetGame() {
+    /// 5回戦終わったあとも勝負を続けることができてしまうので、
+    /// gameCount が 5より大きくなってしまう場合がある。
+    /// そのため、この if (gameCount == 5) の条件はなくてもいいかもしれない。
     if (gameCount == 5) {
       finish = '勝敗はいかに...?';
       showResult = '???';
@@ -167,6 +171,8 @@ class _JyankenPageState extends State<JyankenPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
               ),
+
+              /// リセット などの文言がいいかも
               child: const Text('更新'),
             ),
           ],
