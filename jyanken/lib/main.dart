@@ -171,6 +171,8 @@ class _JyankenPageState extends State<JyankenPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
               ),
+
+              /// リセット などの文言がいいかも
               child: const Text('更新'),
             ),
           ],
